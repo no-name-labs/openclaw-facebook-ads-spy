@@ -1,113 +1,147 @@
-# JOIN OUR COMMUNITY ON SKOOL: [https://www.skool.com/ai-agents-openclaw](https://www.skool.com/ai-agents-openclaw)
+# JOIN OUR COMMUNITY ON [SKOOL](https://www.skool.com/ai-agents-openclaw)
 
-OpenClaw deployment help lives in the Skool community. This repository only explains how to install the Facebook Ads plugin into an existing OpenClaw runtime.
+Need OpenClaw first? Start with the [OpenClaw setup guide in Skool Classroom](https://www.skool.com/ai-agents-openclaw/classroom). If you need live help while wiring Telegram or your runtime, use the [Skool community](https://www.skool.com/ai-agents-openclaw).
 
 # OpenClaw Facebook Ads Spy
 
-OpenClaw Facebook Ads Spy is a Telegram-first investigative plugin for Facebook Ads Library research. It helps affiliate marketers, operators, and growth teams move from a keyword to a live advertiser, landing page, redirect path, and funnel clues in one thread.
+Build your own Facebook ad research stack inside OpenClaw instead of renting a rigid spy tool that costs hundreds of dollars every month.
 
-It is designed to fit naturally into OpenClaw as a plugin, not as a separate bot.
+This plugin lets you search the US Facebook Ads Library from Telegram, pivot into the exact page or domain behind an ad, inspect the landing path, and surface the metadata that matters when you are trying to find live funnels fast.
 
-## Why people use it
+It fits into OpenClaw as a plugin, not as a separate bot.
 
-- Search the US Facebook Ads Library from Telegram
-- Collapse duplicate-heavy ad runs into grouped cards
-- See native media directly in the thread when Telegram accepts it
-- Pivot fast with `/ads page ...`, `/ads domain ...`, and `/ads inspect ...`
-- Reply `page`, `domain`, `inspect`, or `next 10` to keep digging without restarting
-- Inspect landing, final, and browser-observed URLs
-- Spot redirect behavior and delivery divergence hints
-- Capture landing page screenshots when feasible
-- Surface technology and tracker hints
-- Compare the current card against the current pivot bucket for LP, overlap, stack, delivery, and redirect patterns
+## What You Get
 
-## Runtime economics
+- **Your own customizable alternative to expensive ad-spy SaaS.** Keep the workflow in your OpenClaw stack and shape it around your own niche, routing, and operator habits.
+- **Fast discovery of live advertisers and offers.** See active pages, grouped duplicates, creative text, landing domains, and ad-library links without leaving Telegram.
+- **Real funnel tracing instead of keyword-only search.** Follow the path from the landing URL to the final URL, browser-observed result, redirect chain, trackers, and screenshot evidence.
+- **A workflow that adapts to you.** Pivot by page, domain, inspect, and next-page follow-up in one thread instead of bouncing between tools.
+- **A cheap shell around deterministic acquisition.** The surrounding OpenClaw runtime is tested on `openrouter/google/gemini-3.1-flash-lite-preview`, while the ad acquisition and inspect logic stays deterministic instead of guessing.
 
-This plugin is tested inside OpenClaw with the OpenRouter model `openrouter/google/gemini-3.1-flash-lite-preview`.
+## What You Can Uncover
 
-That gives you a low-cost, high-throughput agent shell around the plugin, while the Facebook Ads acquisition and inspect path stays deterministic instead of guessing its way through the data.
+- **Who is really buying traffic** in a niche
+- **Which page and domain** they use repeatedly
+- **Which creatives and hooks** keep showing up
+- **Which landing pages and redirects** traffic flows through
+- **Which trackers and tech stack** sit behind the funnel
+- **Which ad variants are the main machine** versus one-off outliers
 
-## Requirements
+## How You Use It
 
-- An existing OpenClaw installation
-- A Telegram bot already connected to OpenClaw
-- An OpenRouter key wired into OpenClaw
-- Python 3 and Node already available on the OpenClaw host
-- Playwright Chromium installed on the host if you want screenshot-backed `/ads inspect ...`
-- An optional residential HTTP/HTTPS proxy for Meta-facing requests if you want higher acquisition reliability
+Start simple:
 
-## Fastest install for existing OpenClaw users
+```text
+/ads auto insurance
+/ads domain example.com
+/ads page 123456789
+/ads inspect https://example.com
+```
+
+Then keep digging inside the same thread:
+
+```text
+Reply "domain"
+Reply "page"
+Reply "inspect"
+Reply "next 10"
+```
+
+### 1. Search a niche
+
+![Search flow](docs/images/search-flow.png)
+
+### 2. Pivot into the page or domain that looks like a real machine
+
+![Domain pivot flow](docs/images/domain-pivot.png)
+
+### 3. Inspect the landing path, redirect chain, and tracker hints
+
+![Inspect flow](docs/images/inspect-flow.png)
+
+## Install It Into Your Existing OpenClaw
+
+### Step 1. Get OpenClaw running
+
+If OpenClaw is not running yet, use the [OpenClaw setup guide in Skool Classroom](https://www.skool.com/ai-agents-openclaw/classroom).
+
+This repository does **not** teach full OpenClaw deployment from zero. It only covers adding this plugin to an existing OpenClaw runtime.
+
+### Step 2. Prepare Telegram for this plugin
+
+Follow [docs/TELEGRAM_SETUP.md](docs/TELEGRAM_SETUP.md).
+
+You will collect the two values the plugin needs:
+
+- **`telegramChatId`**
+- **`telegramThreadId`**
+
+If you get stuck while wiring Telegram, ask in the [Skool community](https://www.skool.com/ai-agents-openclaw).
+
+### Step 3. Wire OpenRouter
+
+Follow [docs/OPENROUTER_SETUP.md](docs/OPENROUTER_SETUP.md).
+
+Recommended primary model:
+
+- **`openrouter/google/gemini-3.1-flash-lite-preview`**
+
+### Step 4. Install Playwright if you want inspect screenshots
+
+Clone the plugin repo first:
 
 ```bash
 git clone https://github.com/no-name-labs/openclaw-facebook-ads-spy.git
 cd openclaw-facebook-ads-spy
-./scripts/install-inspect-deps.sh
-openclaw plugins install "$(pwd)"
-openclaw plugins enable facebook-ads-us
 ```
 
-Then:
-
-1. Merge [`examples/openclaw-plugin-config.json`](examples/openclaw-plugin-config.json) into your `openclaw.json`.
-2. Restart OpenClaw.
-3. Send `/ads auto insurance` in your Telegram ads topic.
-
-## What this plugin adds to OpenClaw
-
-- Plugin id: `facebook-ads-us`
-- Telegram-first workflow for `/ads ...` search, pivots, and inspect
-- No separate poller, no separate bot runtime, no ad warehouse
-- Ephemeral SQLite session state only
-
-## Telegram setup
-
-Read [docs/TELEGRAM_SETUP.md](docs/TELEGRAM_SETUP.md).
-
-You will need:
-
-- a Telegram bot token
-- a supergroup with Topics enabled
-- the group `telegramChatId`
-- the ads topic `telegramThreadId`
-- BotFather privacy disabled
-- admin rights for the bot on the forum if you run this in a topic
-
-## OpenRouter setup
-
-Read [docs/OPENROUTER_SETUP.md](docs/OPENROUTER_SETUP.md).
-
-Recommended model:
-
-- `openrouter/google/gemini-3.1-flash-lite-preview`
-
-## Residential Meta proxy
-
-Residential proxy support is already built into the runtime for Meta-facing requests.
-
-It is optional, but recommended if you want higher reliability against Facebook challenge/rate-limit behavior.
-
-Read [docs/META_PROXY_SETUP.md](docs/META_PROXY_SETUP.md).
-
-## Inspect screenshots
-
-`/ads inspect ...` can capture landing page screenshots, but only if Playwright Chromium is available on the host.
-
-Install that dependency with:
+If you want screenshot-backed `/ads inspect ...`, run:
 
 ```bash
 ./scripts/install-inspect-deps.sh
 ```
 
-## Example plugin config
+If you do not need inspect screenshots yet, you can skip this step and come back later.
 
-See [examples/openclaw-plugin-config.json](examples/openclaw-plugin-config.json).
+### Step 5. Install and enable the plugin
 
-The example covers the normal install path. Legacy benchmark/reference fields still exist in the plugin schema, but they are optional and not required for normal operator use.
+```bash
+openclaw plugins install "$(pwd)"
+openclaw plugins enable facebook-ads-us
+```
+
+### Step 6. Merge the config snippet and restart OpenClaw
+
+Copy the plugin block from [examples/openclaw-plugin-config.json](examples/openclaw-plugin-config.json) into your `openclaw.json`.
+
+Then restart OpenClaw so the Telegram route and plugin config are live together.
+
+### Step 7. Run the first command
+
+Send:
+
+```text
+/ads auto insurance
+```
+
+in your dedicated Telegram ads topic.
+
+## Optional Reliability Upgrade
+
+If your Meta acquisition is unstable, you can route **Meta-facing requests only** through a residential HTTP/HTTPS proxy.
+
+Read [docs/META_PROXY_SETUP.md](docs/META_PROXY_SETUP.md).
+
+Telegram transport and OpenRouter stay direct.
+
+## Why It Stays Cheap
+
+This plugin is tested inside OpenClaw with `openrouter/google/gemini-3.1-flash-lite-preview`.
+
+That gives you a fast, low-cost shell around the plugin, while the Facebook Ads acquisition and inspect path stays deterministic instead of LLM-generated guesswork.
 
 ## Scope
 
-This public repository is the installable distribution package.
+This repository is the installable distribution package for the plugin.
 
-The private development source of truth stays separate. OpenClaw deployment tutorials, host bootstrap walkthroughs, and advanced operator support live in the Skool community:
-
-- [https://www.skool.com/ai-agents-openclaw](https://www.skool.com/ai-agents-openclaw)
+The private development source of truth stays separate. OpenClaw deployment tutorials, host bootstrap walkthroughs, and advanced operator support live in the [Skool community](https://www.skool.com/ai-agents-openclaw).

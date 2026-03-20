@@ -1,26 +1,29 @@
 # Residential Meta Proxy Setup
 
-This plugin can route **Meta-facing acquisition requests only** through a residential HTTP or HTTPS proxy.
+This is an **optional advanced reliability step**.
 
-That means:
+Use it only if your Meta acquisition is unstable or challenge-heavy.
 
-- Facebook/Meta requests can use the proxy
-- Telegram transport stays direct
-- OpenRouter traffic stays direct
-- normal OpenClaw traffic stays direct
+## What this proxy does
 
-This is useful when Facebook challenge behavior or rate limits make direct acquisition unreliable.
+It routes **Meta-facing acquisition requests only** through a residential HTTP or HTTPS proxy.
 
-## Supported proxy types
+It does **not** proxy:
 
-Use:
+- Telegram transport
+- OpenRouter traffic
+- normal OpenClaw traffic
+
+## Step 1. Use the right proxy type
+
+Supported:
 
 - `http`
 - `https`
 
-Do not use `socks5` in this build.
+Do **not** use `socks5` in this build.
 
-## Required environment variables
+## Step 2. Export the proxy environment variables
 
 ```bash
 export FACEBOOK_ADS_META_PROXY_ENABLED=1
@@ -31,24 +34,22 @@ export FACEBOOK_ADS_META_PROXY_USERNAME=your_username
 export FACEBOOK_ADS_META_PROXY_PASSWORD=your_password
 ```
 
-Username and password are optional only if your provider truly gives you an open proxy endpoint.
+`FACEBOOK_ADS_META_PROXY_USERNAME` and `FACEBOOK_ADS_META_PROXY_PASSWORD` are optional only if your provider truly gives you an open proxy endpoint.
 
-## What to set in OpenClaw
+## Step 3. Keep credentials out of plugin config
 
-Nothing goes into the plugin config for proxy credentials.
+Do **not** put proxy credentials into the plugin config JSON.
 
-These values are host environment variables for the deterministic Python runtime.
+These are host environment variables for the deterministic Python runtime.
 
-## Restart after setting them
+## Step 4. Restart OpenClaw
 
-After exporting the variables, restart OpenClaw so the plugin picks them up on the next run.
+Restart OpenClaw after exporting the variables so the plugin picks them up.
 
-## Recommended use
+## When to turn it on
 
-Start without the proxy if your direct acquisition is stable.
-
-Turn it on if you see:
+Use it when you see:
 
 - repeated Facebook challenge behavior
-- acquisition instability on normal searches
+- unstable acquisition on normal searches
 - better results with residential routing in your own environment

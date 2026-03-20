@@ -1,16 +1,8 @@
 # OpenRouter Setup
 
-This plugin runs inside OpenClaw, so the model is configured in OpenClaw rather than in the plugin itself.
+This plugin runs inside OpenClaw, so the model is configured in OpenClaw rather than inside the plugin.
 
-## Recommended model
-
-Use:
-
-- `openrouter/google/gemini-3.1-flash-lite-preview`
-
-That is the model this plugin has been tested with in the current OpenClaw runtime.
-
-## 1. Create an OpenRouter API key
+## Step 1. Create an OpenRouter API key
 
 1. Open your OpenRouter account.
 2. Create an API key.
@@ -22,21 +14,21 @@ If your OpenClaw deployment reads provider credentials from environment variable
 export OPENROUTER_API_KEY="sk-or-..."
 ```
 
-## 2. Point OpenClaw at OpenRouter
+## Step 2. Point OpenClaw at OpenRouter
 
-Your OpenClaw model config should use:
+Use:
 
-- base URL: `https://openrouter.ai/api/v1`
-- primary model: `openrouter/google/gemini-3.1-flash-lite-preview`
+- **Base URL:** `https://openrouter.ai/api/v1`
+- **Primary model:** `openrouter/google/gemini-3.1-flash-lite-preview`
 
 Fallback models are optional. They are not required for this plugin package.
 
-## 3. Restart OpenClaw
+## Step 3. Restart OpenClaw
 
-After wiring the key and model, restart OpenClaw so the Telegram route and the plugin share the same live runtime.
+Restart OpenClaw after wiring the key and model so the Telegram route and plugin share the same live runtime.
 
-## Important note
+## Why this model
 
-The OpenClaw agent shell can use OpenRouter, but the Facebook Ads acquisition and inspect path in this plugin stays deterministic.
+This plugin has been tested with **`openrouter/google/gemini-3.1-flash-lite-preview`** as the surrounding OpenClaw shell.
 
-That is intentional: the model handles the surrounding OpenClaw shell, while the ad search/pivot/inspect path avoids LLM guesswork.
+The Facebook Ads acquisition and inspect path still stays deterministic. That is intentional: the model handles the OpenClaw shell, while the ad research path avoids LLM guesswork.
