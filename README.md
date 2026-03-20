@@ -34,6 +34,7 @@ That gives you a low-cost, high-throughput agent shell around the plugin, while 
 - An OpenRouter key wired into OpenClaw
 - Python 3 and Node already available on the OpenClaw host
 - Playwright Chromium installed on the host if you want screenshot-backed `/ads inspect ...`
+- An optional residential HTTP/HTTPS proxy for Meta-facing requests if you want higher acquisition reliability
 
 ## Fastest install for existing OpenClaw users
 
@@ -78,6 +79,14 @@ Read [docs/OPENROUTER_SETUP.md](docs/OPENROUTER_SETUP.md).
 Recommended model:
 
 - `openrouter/google/gemini-3.1-flash-lite-preview`
+
+## Residential Meta proxy
+
+Residential proxy support is already built into the runtime for Meta-facing requests.
+
+It is optional, but recommended if you want higher reliability against Facebook challenge/rate-limit behavior.
+
+Read [docs/META_PROXY_SETUP.md](docs/META_PROXY_SETUP.md).
 
 ## Inspect screenshots
 
