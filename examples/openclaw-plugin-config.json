@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "entries": {
+      "facebook-ads-us": {
+        "enabled": true,
+        "config": {
+          "sessionDbPath": "/home/node/.openclaw/workspace/workspace-main/data/facebook-ads-sessions.db",
+          "requestTimeoutSec": 30,
+          "sessionTtlHours": 12,
+          "telegramAccountId": "default",
+          "telegramChatId": "-1001234567890",
+          "telegramThreadId": 30
+        }
+      }
+    }
+  }
+}

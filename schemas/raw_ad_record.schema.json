@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RawAdRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ad_archive_id": { "type": "string" },
+    "ad_library_url": { "type": "string" },
+    "page_id": { "type": "string" },
+    "advertiser": { "type": "string" },
+    "page_profile_url": { "type": ["string", "null"] },
+    "creative_body": { "type": ["string", "null"] },
+    "creative_body_availability": {
+      "type": "string",
+      "enum": ["resolved", "placeholder_unresolved", "unavailable"]
+    },
+    "creative_title": { "type": ["string", "null"] },
+    "creative_title_availability": {
+      "type": "string",
+      "enum": ["resolved", "placeholder_unresolved", "unavailable"]
+    },
+    "landing_page_url": { "type": ["string", "null"] },
+    "landing_domain": { "type": ["string", "null"] },
+    "search_domain": { "type": ["string", "null"] },
+    "search_domains": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "media_url": { "type": ["string", "null"] },
+    "active_start_date": { "type": ["string", "null"] },
+    "active_end_date": { "type": ["string", "null"] },
+    "collation_id": { "type": ["string", "null"] },
+    "collation_count": { "type": "integer", "minimum": 1 },
+    "cta_text": { "type": ["string", "null"] },
+    "page_like_count": { "type": ["integer", "null"] },
+    "page_categories": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "display_format": { "type": ["string", "null"] }
+  },
+  "required": [
+    "ad_archive_id",
+    "ad_library_url",
+    "page_id",
+    "advertiser",
+    "page_profile_url",
+    "creative_body",
+    "creative_body_availability",
+    "creative_title",
+    "creative_title_availability",
+    "landing_page_url",
+    "landing_domain",
+    "search_domain",
+    "search_domains",
+    "media_url",
+    "active_start_date",
+    "active_end_date",
+    "collation_id",
+    "collation_count",
+    "cta_text",
+    "page_like_count",
+    "page_categories",
+    "display_format"
+  ]
+}

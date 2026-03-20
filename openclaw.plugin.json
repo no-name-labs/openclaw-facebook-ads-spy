@@ -1,0 +1,113 @@
+{
+  "id": "facebook-ads-us",
+  "name": "facebook-ads-us",
+  "version": "0.1.0",
+  "description": "USA-only Facebook Ads Library query-time plugin for OpenClaw MVP",
+  "main": "index.ts",
+  "channels": ["telegram"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "sessionDbPath": {
+        "type": "string"
+      },
+      "requestTimeoutSec": {
+        "type": "integer",
+        "minimum": 5
+      },
+      "sessionTtlHours": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "telegramAccountId": {
+        "type": "string"
+      },
+      "telegramChatId": {
+        "type": "string"
+      },
+      "telegramThreadId": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "referenceBaseUrl": {
+        "type": "string"
+      },
+      "referenceTokenEnvVar": {
+        "type": "string"
+      },
+      "referenceSearchPath": {
+        "type": "string"
+      },
+      "searchDocId": {
+        "type": "string"
+      },
+      "detailsDocId": {
+        "type": "string"
+      },
+      "collationDocId": {
+        "type": "string"
+      },
+      "aggregateDocId": {
+        "type": "string"
+      },
+      "filterContextDocId": {
+        "type": "string"
+      }
+    }
+  },
+  "uiHints": {
+    "sessionDbPath": {
+      "label": "Session DB Path",
+      "placeholder": "/home/node/.openclaw/data/facebook-ads-sessions.db"
+    },
+    "requestTimeoutSec": {
+      "label": "Request Timeout",
+      "placeholder": "30"
+    },
+    "sessionTtlHours": {
+      "label": "Session TTL Hours",
+      "placeholder": "12"
+    },
+    "telegramAccountId": {
+      "label": "Telegram Account ID",
+      "placeholder": "default"
+    },
+    "telegramChatId": {
+      "label": "Telegram Chat ID",
+      "placeholder": "-1003601641279"
+    },
+    "telegramThreadId": {
+      "label": "Telegram Thread ID",
+      "placeholder": "30"
+    },
+    "referenceBaseUrl": {
+      "label": "Reference Base URL",
+      "placeholder": "https://reference.example.com"
+    },
+    "referenceTokenEnvVar": {
+      "label": "Reference Token Env Var",
+      "placeholder": "FB_ADS_REFERENCE_TOKEN",
+      "sensitive": true
+    },
+    "referenceSearchPath": {
+      "label": "Reference Search Path",
+      "placeholder": "/search"
+    },
+    "searchDocId": {
+      "label": "Search Doc ID"
+    },
+    "detailsDocId": {
+      "label": "Details Doc ID"
+    },
+    "collationDocId": {
+      "label": "Collation Doc ID"
+    },
+    "aggregateDocId": {
+      "label": "Aggregate Doc ID"
+    },
+    "filterContextDocId": {
+      "label": "Filter Context Doc ID"
+    }
+  }
+}

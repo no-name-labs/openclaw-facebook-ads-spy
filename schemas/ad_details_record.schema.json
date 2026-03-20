@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AdDetailsRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ad_archive_id": { "type": "string" },
+    "page_id": { "type": "string" },
+    "page_name": { "type": ["string", "null"] },
+    "page_alias": { "type": ["string", "null"] },
+    "page_likes": { "type": ["integer", "null"] },
+    "ig_followers": { "type": ["integer", "null"] }
+  },
+  "required": ["ad_archive_id", "page_id", "page_name", "page_alias", "page_likes", "ig_followers"]
+}

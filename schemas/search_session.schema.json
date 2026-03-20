@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SearchSession",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "search_session_id": { "type": "string" },
+    "chat_id": { "type": "string" },
+    "user_id": { "type": "string" },
+    "keyword": { "type": "string" },
+    "date_from": { "type": ["string", "null"] },
+    "date_to": { "type": ["string", "null"] },
+    "geo": { "type": "string", "const": "US" },
+    "graphql_session_id": { "type": "string" },
+    "next_cursor": { "type": ["string", "null"] },
+    "total_count": { "type": ["integer", "null"] },
+    "total_count_text": { "type": ["string", "null"] },
+    "exhausted": { "type": "boolean" },
+    "prompt_message_id": { "type": ["integer", "null"] },
+    "status": { "type": "string" },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  },
+  "required": [
+    "search_session_id",
+    "chat_id",
+    "user_id",
+    "keyword",
+    "date_from",
+    "date_to",
+    "geo",
+    "graphql_session_id",
+    "next_cursor",
+    "total_count",
+    "total_count_text",
+    "exhausted",
+    "prompt_message_id",
+    "status",
+    "created_at",
+    "updated_at"
+  ]
+}

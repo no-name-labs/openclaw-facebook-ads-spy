@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AcquisitionDiagnostic",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "keyword": { "type": "string" },
+    "geo": { "type": "string", "const": "US" },
+    "date_from": { "type": ["string", "null"] },
+    "date_to": { "type": ["string", "null"] },
+    "bootstrap_ok": { "type": "boolean" },
+    "search_ok": { "type": "boolean" },
+    "details_ok": { "type": "boolean" },
+    "collation_ok": { "type": "boolean" },
+    "total_count_text": { "type": ["string", "null"] },
+    "total_count": { "type": ["integer", "null"] },
+    "doc_ids": { "type": "object", "additionalProperties": { "type": "string" } },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "errors": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": [
+    "keyword",
+    "geo",
+    "date_from",
+    "date_to",
+    "bootstrap_ok",
+    "search_ok",
+    "details_ok",
+    "collation_ok",
+    "total_count_text",
+    "total_count",
+    "doc_ids",
+    "notes",
+    "errors"
+  ]
+}
