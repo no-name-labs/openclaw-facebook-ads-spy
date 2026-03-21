@@ -1,11 +1,19 @@
 import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
 import os from "node:os";
 import { mkdir, mkdtemp, readFile, rm, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const PYTHON = process.env.PYTHON_BIN || "python3";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const LOCAL_PYTHON_CANDIDATES = [
+  path.join(__dirname, ".venv", "bin", "python"),
+  path.join(__dirname, ".venv", "Scripts", "python.exe"),
+];
+const PYTHON =
+  (process.env.PYTHON_BIN || "").trim()
+  || LOCAL_PYTHON_CANDIDATES.find((candidate) => existsSync(candidate))
+  || "python3";
 const RUNTIME_PATH = path.join(__dirname, "backend", "facebook_ads_runtime.py");
 const DEFAULT_ACTION_TIMEOUT_MS = 180000;
 const SEARCH_TIMEOUT_MS = 600000;

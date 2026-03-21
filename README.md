@@ -101,6 +101,21 @@ If you want screenshot-backed `/ads inspect ...`, run:
 ./scripts/install-inspect-deps.sh
 ```
 
+On Debian/Ubuntu hosts, if that script says `python3-venv` is missing, install it once:
+
+```bash
+sudo apt-get install -y python3-venv
+```
+
+If Ubuntu still reports that `ensurepip` is unavailable, install the versioned
+venv package too:
+
+```bash
+sudo apt-get install -y python3.12-venv
+```
+
+The script creates a repo-local `.venv` and the plugin auto-detects it.
+
 If you do not need inspect screenshots yet, you can skip this step and come back later.
 
 ### Step 5. Install and enable the plugin

@@ -1,0 +1,11 @@
+{
+  "name": "facebook-ads-us",
+  "version": "0.1.0",
+  "description": "Installable OpenClaw Facebook Ads Spy plugin package",
+  "license": "MIT",
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}
