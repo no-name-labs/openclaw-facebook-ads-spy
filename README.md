@@ -55,7 +55,7 @@ Reply "next 10"
 
 ![Domain pivot flow](docs/images/domain-pivot.png)
 
-### 3. Inspect the landing path, redirect chain, and tracker hints
+### 3. Run inspect on the exact landing URL you want to verify
 
 ![Inspect flow](docs/images/inspect-flow.png)
 
