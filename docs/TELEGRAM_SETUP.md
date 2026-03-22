@@ -10,6 +10,16 @@ This plugin works best when it owns one dedicated Telegram route.
 2. Create a new bot.
 3. Copy the bot token.
 4. **Disable privacy mode** for that bot.
+5. In BotFather, run:
+
+```text
+/setprivacy
+```
+
+Then:
+
+- choose your bot
+- choose **`Disable`**
 
 **Important:** privacy mode must be disabled or ordinary topic-root text will not reliably reach the ads workflow.
 

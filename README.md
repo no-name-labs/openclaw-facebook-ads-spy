@@ -71,6 +71,14 @@ This repository does **not** teach full OpenClaw deployment from zero. It only c
 
 Follow [docs/TELEGRAM_SETUP.md](docs/TELEGRAM_SETUP.md).
 
+In BotFather, the exact privacy command is:
+
+```text
+/setprivacy
+```
+
+Then choose your bot and click **`Disable`**.
+
 You will collect the two values the plugin needs:
 
 - **`telegramChatId`**
