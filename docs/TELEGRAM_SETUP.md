@@ -8,7 +8,7 @@ This plugin works best when it owns one dedicated Telegram route.
 
 1. Open BotFather.
 2. Create a new bot.
-3. Copy the bot token.
+3. Copy the bot token and keep it somewhere safe on the OpenClaw host.
 4. **Disable privacy mode** for that bot.
 5. In BotFather, run:
 
@@ -35,9 +35,16 @@ Recommended setup:
 
 If you run this inside a forum topic, give the bot **admin rights with topic-management permissions** on that forum.
 
-## Step 3. Send one test message in the ads topic
+This is the most reliable shape for this plugin:
 
-Send one manual message inside the exact topic you want this plugin to own.
+- one dedicated supergroup
+- one dedicated ads topic
+- one bot with privacy disabled
+- one bot admin that can manage topics
+
+## Step 3. Send one plain test message in the ads topic
+
+Send one simple manual message like `hello` inside the exact topic you want this plugin to own.
 
 That creates a fresh Telegram update containing the IDs you need.
 
@@ -49,12 +56,14 @@ Call:
 curl "https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates"
 ```
 
-Find the message you just sent and copy:
+Find the latest message you just sent in that ads topic and copy:
 
 - **`message.chat.id`** -> this becomes **`telegramChatId`**
 - **`message.message_thread_id`** -> this becomes **`telegramThreadId`**
 
 If you run the workflow in a normal group without topics, you only need **`message.chat.id`**.
+
+If you do not see your latest topic message yet, send one more plain message in the topic and call `getUpdates` again.
 
 ## Step 5. Put those values into the plugin config
 
@@ -81,3 +90,11 @@ Restart OpenClaw after the config change, then send:
 ```
 
 inside the dedicated ads topic.
+
+If the bot does not answer, check these in order:
+
+1. **Privacy is really disabled** for that bot
+2. **The bot is really an admin** in the same group/topic you are testing
+3. **`telegramChatId`** matches the same group
+4. **`telegramThreadId`** matches the same topic
+5. OpenClaw was restarted after the config change

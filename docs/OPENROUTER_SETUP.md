@@ -6,7 +6,7 @@ This plugin runs inside OpenClaw, so the model is configured in OpenClaw rather 
 
 1. Open your OpenRouter account.
 2. Create an API key.
-3. Store it on the OpenClaw host.
+3. Store it on the OpenClaw host where your OpenClaw runtime can read it.
 
 If your OpenClaw deployment reads provider credentials from environment variables, use:
 
@@ -26,6 +26,8 @@ Fallback models are optional. They are not required for this plugin package.
 ## Step 3. Restart OpenClaw
 
 Restart OpenClaw after wiring the key and model so the Telegram route and plugin share the same live runtime.
+
+If the plugin does not answer after setup, confirm OpenClaw itself can see the OpenRouter key before you debug the plugin.
 
 ## Why this model
 

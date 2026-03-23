@@ -61,13 +61,39 @@ Reply "next 10"
 
 ## Install It Into Your Existing OpenClaw
 
+Before you start, make sure you already have:
+
+- a working OpenClaw runtime you can restart
+- access to your `openclaw.json`
+- one Telegram bot you want OpenClaw to use for this plugin
+
+If OpenClaw itself is not healthy yet, stop here and use the [OpenClaw setup guide in Skool Classroom](https://www.skool.com/ai-agents-openclaw/classroom) first.
+
 ### Step 1. Get OpenClaw running
 
 If OpenClaw is not running yet, use the [OpenClaw setup guide in Skool Classroom](https://www.skool.com/ai-agents-openclaw/classroom).
 
 This repository does **not** teach full OpenClaw deployment from zero. It only covers adding this plugin to an existing OpenClaw runtime.
 
-### Step 2. Prepare Telegram for this plugin
+Before you continue, make sure the OpenClaw CLI itself is healthy:
+
+```bash
+openclaw plugins list
+openclaw plugins doctor
+```
+
+If those checks are already failing, fix OpenClaw first before you debug this plugin.
+
+### Step 2. Clone this plugin repo
+
+```bash
+git clone https://github.com/no-name-labs/openclaw-facebook-ads-spy.git
+cd openclaw-facebook-ads-spy
+```
+
+You install the plugin from this repo root, so clone it before you do anything else.
+
+### Step 3. Prepare Telegram for this plugin
 
 Follow [docs/TELEGRAM_SETUP.md](docs/TELEGRAM_SETUP.md).
 
@@ -86,7 +112,7 @@ You will collect the two values the plugin needs:
 
 If you get stuck while wiring Telegram, ask in the [Skool community](https://www.skool.com/ai-agents-openclaw).
 
-### Step 3. Wire OpenRouter
+### Step 4. Wire OpenRouter
 
 Follow [docs/OPENROUTER_SETUP.md](docs/OPENROUTER_SETUP.md).
 
@@ -94,14 +120,7 @@ Recommended primary model:
 
 - **`openrouter/google/gemini-3.1-flash-lite-preview`**
 
-### Step 4. Install Playwright if you want inspect screenshots
-
-Clone the plugin repo first:
-
-```bash
-git clone https://github.com/no-name-labs/openclaw-facebook-ads-spy.git
-cd openclaw-facebook-ads-spy
-```
+### Step 5. Install Playwright if you want inspect screenshots
 
 If you want screenshot-backed `/ads inspect ...`, run:
 
@@ -126,20 +145,21 @@ The script creates a repo-local `.venv` and the plugin auto-detects it.
 
 If you do not need inspect screenshots yet, you can skip this step and come back later.
 
-### Step 5. Install and enable the plugin
+### Step 6. Install and enable the plugin
 
 ```bash
 openclaw plugins install "$(pwd)"
 openclaw plugins enable facebook-ads-us
+openclaw plugins doctor
 ```
 
-### Step 6. Merge the config snippet and restart OpenClaw
+### Step 7. Merge the config snippet and restart OpenClaw
 
 Copy the plugin block from [examples/openclaw-plugin-config.json](examples/openclaw-plugin-config.json) into your `openclaw.json`.
 
 Then restart OpenClaw so the Telegram route and plugin config are live together.
 
-### Step 7. Run the first command
+### Step 8. Run the first command
 
 Send:
 
@@ -148,6 +168,13 @@ Send:
 ```
 
 in your dedicated Telegram ads topic.
+
+If the bot does not answer in that topic, check these four things before anything else:
+
+1. **Privacy mode is disabled** in BotFather with `/setprivacy` -> `Disable`
+2. **The bot is an admin** in the group and can manage topics when you use forum topics
+3. **`telegramChatId` and `telegramThreadId`** match the exact route you are testing
+4. **OpenClaw was restarted** after your config changes
 
 ## Optional Reliability Upgrade
 
